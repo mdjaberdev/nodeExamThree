@@ -124,6 +124,13 @@ const singlStudentDeleteController = async (req, res) => {
       message: "Student not found",
     });
   }
+  if (existingStudent.enrolledCourses) {
+    return res.status(400).json({
+      success: false,
+      message:
+        "Cannot delete student because they are enrolled in one or more courses",
+    });
+  }
 
   const deleteStudent = await Student.findByIdAndDelete({ _id: id });
 
