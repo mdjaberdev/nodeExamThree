@@ -120,7 +120,7 @@ const singleCourseUpdateController = async (req, res) => {
       });
     }
 
-    if (req.body.price !== undefined && req.body.price <= 0) {
+    if (price !== undefined && price <= 0) {
       return res.status(400).json({
         success: false,
         message: "Price must be greater the 0",
@@ -135,6 +135,7 @@ const singleCourseUpdateController = async (req, res) => {
 
     const singleCourseUpdate = await Course.findByIdAndUpdate(
       { _id: id },
+      { title, price, category, duration },
       { new: true },
     );
 
